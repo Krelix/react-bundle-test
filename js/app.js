@@ -3,10 +3,19 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, Link, DefaultRoute, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, Link, DefaultRoute, IndexRoute, RouterContext, browserHistory } from 'react-router'
+import {createStore, combineReducers} from 'redux'
+import { Provider } from 'react-redux'
 import Home from './components/Home'
 import ButtonCreator from './components/ButtonCreator'
 import ButtonSimulator from './components/ButtonSimulator'
+import reducers from './reducers'
+
+//const reducer = combineReducers(Object.assign({}, buttonReducers))
+
+const theStore = createStore(reducers)
+console.log("Created the store")
+console.log(theStore)
 
 class App extends React.Component {
     render() {
@@ -44,6 +53,9 @@ let routes = (
 
 // Render the Router which will handle components rendering depending on the route
 ReactDOM.render(
-    <Router history={browserHistory}>{routes}</Router>,
+    <Provider store={theStore}>
+        <Router history={browserHistory}>{routes}</Router>
+    </Provider>,
+
     document.getElementById("app")
 )
