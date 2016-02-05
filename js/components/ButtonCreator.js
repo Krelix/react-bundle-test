@@ -6,8 +6,6 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as buttonActions from '../actions/ButtonActions'
 
-console.log(buttonActions)
-
 // Method used to map the state stores in the store to the props of the component
 function mapStateToProps(state) {
     // return a new object (even if it's just a shallow copy of the state)

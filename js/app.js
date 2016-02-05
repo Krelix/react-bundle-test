@@ -1,9 +1,10 @@
 /**
- * Created by brizarda on 03/02/2016
+ * Created by @krelix on 03/02/2016
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, Link, DefaultRoute, IndexRoute, RouterContext, browserHistory } from 'react-router'
+import { Router, Route, Link, DefaultRoute, IndexRoute, RouterContext, useRouterHistory } from 'react-router'
+import {createHashHistory} from 'history'
 import {createStore, combineReducers} from 'redux'
 import { Provider } from 'react-redux'
 import Home from './components/Home'
@@ -11,11 +12,8 @@ import ButtonCreator from './components/ButtonCreator'
 import ButtonSimulator from './components/ButtonSimulator'
 import reducers from './reducers'
 
-//const reducer = combineReducers(Object.assign({}, buttonReducers))
-
 const theStore = createStore(reducers)
-console.log("Created the store")
-console.log(theStore)
+const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 
 class App extends React.Component {
     render() {
@@ -52,9 +50,10 @@ let routes = (
  })*/
 
 // Render the Router which will handle components rendering depending on the route
+// NOTE: Use browserHistory if you don't want to see the hash sign in the URL
 ReactDOM.render(
     <Provider store={theStore}>
-        <Router history={browserHistory}>{routes}</Router>
+        <Router history={appHistory}>{routes}</Router>
     </Provider>,
 
     document.getElementById("app")

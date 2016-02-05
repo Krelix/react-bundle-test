@@ -7,7 +7,7 @@ import React from 'react'
 class ButtonArray extends React.Component {
     constructor(props) {
         super(props)
-        this.handleButtonClick = this.handleButtonClick.bind(this)
+        //this.handleButtonClick = this.handleButtonClick.bind(this)
     }
 
     render() {
@@ -16,7 +16,7 @@ class ButtonArray extends React.Component {
                 <div>
                     { this.props.buttons.map((button) => {
                         return (<div className="button" key={button.id}
-                                     onClick={this.handleButtonClick}>{button.name}</div> )
+                                     onClick={this.handleButtonClick.bind(this, button.id)}>{button.name}</div> )
                     })}
                 </div>
             )
@@ -25,10 +25,8 @@ class ButtonArray extends React.Component {
         }
     }
 
-    handleButtonClick(e) {
+    handleButtonClick(index, e) {
         // Get the button from props by using the data-reactid on the target.
-        let index = e.target.dataset.reactid;
-        index = index.substring(index.lastIndexOf('$') + 1, index.length);
         alert(this.props.buttons[Number(index) - 1].message);
         // TODO: Create a store, add the message to it and re-render the logger to show the message.
     }
