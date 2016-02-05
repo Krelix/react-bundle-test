@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, Link, DefaultRoute, IndexRoute, RouterContext, useRouterHistory } from 'react-router'
+import { Router, Route, Link, IndexRoute, RouterContext, useRouterHistory } from 'react-router'
 import {createHashHistory} from 'history'
 import {createStore, combineReducers} from 'redux'
 import { Provider } from 'react-redux'
@@ -12,7 +12,10 @@ import ButtonCreator from './components/ButtonCreator'
 import ButtonSimulator from './components/ButtonSimulator'
 import reducers from './reducers'
 
+// Creates a store using the reducers defined in ./reducers/index.js
 const theStore = createStore(reducers)
+// Creates a history using the hashHistory element from history
+// allows access to some URLs without setting up server-side rendering
 const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 
 class App extends React.Component {

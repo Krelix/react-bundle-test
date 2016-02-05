@@ -32,3 +32,5 @@ node_modules
 # Webstorm .idea folder
 .idea
 
+# Webpack build folder (better to rebuild after checkout)
+build

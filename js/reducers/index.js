@@ -3,13 +3,15 @@
  */
 import {combineReducers} from 'redux'
 import buttonReducer from './ButtonReducer'
+import messageReducer from './MessageReducer'
 
 /* Uncomment this when you want to combine multiple reducers to export */
-/*const appReucers = combineReducers({
- buttonReducer
- //, other reducers
- })*/
+const appReducers = combineReducers({
+    buttonReducer,
+    messageReducer
+ })
 
-const appReducers = buttonReducer
+// Single reducer case
+//const appReducers = buttonReducer
 
 export default appReducers

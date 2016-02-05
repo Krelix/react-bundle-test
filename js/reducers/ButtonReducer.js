@@ -2,7 +2,7 @@
  * Created by brizarda on 04/02/2016.
  */
 
-const buttonReducer = (state = [], action) => {
+const buttonReducer = (state = {}, action) => {
     "use strict";
     if (!state || !action)
         return state;
