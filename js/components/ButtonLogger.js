@@ -2,15 +2,27 @@
  * Created by brizarda on 05/02/2016.
  */
 import React from 'react'
+import {connect} from 'react-redux'
 
-export default class ButtonLogger extends React.Component {
+// Same as in ButtonCreator, but we're using ES2015 arrow function
+const mapStateToProps = (state) => {
+    // If messages exists
+    if (state)
+        return {
+            "messages": state.messageReducer.messages
+        }
+    else
+        return {}
+}
+
+class ButtonLogger extends React.Component {
     render() {
         if (this.props && this.props["messages"]) {
             return (
-                <div>
+                <div style={{"clear": "both"}}>
                     <hr />
                     {this.props.messages.map((message) => {
-                        return <p>{message}</p>
+                        return <p key={message.id}>{message.date.toLocaleString()} - {message.text}</p>
                     })}
                 </ div >
             )
@@ -20,3 +32,4 @@ export default class ButtonLogger extends React.Component {
     }
 }
 
+export default connect(mapStateToProps)(ButtonLogger)

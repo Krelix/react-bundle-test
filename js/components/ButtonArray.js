@@ -3,21 +3,31 @@
  */
 import React from 'react'
 import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
 
+import * as messageActions from '../actions/MessageActions'
+
+// Same as in ButtonCreator, but we're using ES2015 arrow function
 const mapStateToProps = (state) => {
     // If buttons exist
-    if (state && state.buttons)
+    if (state)
         return {
-            "buttons": state.buttons
+            "buttons": state.buttonReducer.buttons
         }
     else
-        return {}
+        return {"buttons": []}
+}
+
+// Map dispatch to actions to impact messages and not buttons
+const mapDispatchToProps = (dispatch) => {
+    "use strict";
+    return {actions: bindActionCreators(messageActions, dispatch)}
 }
 
 class ButtonArray extends React.Component {
     render() {
         // Render different stuff depending on props
-        if (this.props && this.props["buttons"]) {
+        if (this.props && this.props.buttons) {
             return (
                 <div>
                     { this.props.buttons.map((button) => {
@@ -27,9 +37,9 @@ class ButtonArray extends React.Component {
                 </div>
             )
         } else {
-            // fromCodePoint used to get an emoji in the HTML page
+            // fromCodePoint used to get an emoji in the HTML page (because why not)
             // Use that for unicode characters (safer than pasting the unicode character in,
-            // if your files get changed from UTF-8 to something else
+            // if your files get changed from UTF-8 to something else it'll render a weird character)
             return (
                 <div style={{clear: "both"}}>
                     <p>{'No button to test yet ' + String.fromCodePoint(128545)}</p></div>
@@ -37,11 +47,10 @@ class ButtonArray extends React.Component {
         }
     }
 
+    // Passing the index from the onClick even, with the 'bind' function
     handleButtonClick(index, e) {
-        // Get the button from props by using the data-reactid on the target.
-        console.log(this.props.buttons[Number(index)].message);
-        // TODO: Create a store, add the message to it and re-render the logger to show the message.
+        this.props.actions.addMessage(this.props.buttons[Number(index)].message);
     }
 }
 
-export default connect(mapStateToProps)(ButtonArray)
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonArray)

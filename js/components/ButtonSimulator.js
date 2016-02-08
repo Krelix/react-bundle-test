@@ -7,7 +7,6 @@ import ButtonArray from './ButtonArray'
 
 export default class ButtonSimulator extends React.Component {
     render() {
-        let buttonTest = [{id: 1, name: "Click me...", message: "WHY DID YOU DO THIS"}]
         return (
             <div>
                 <h1>Simulator</h1>

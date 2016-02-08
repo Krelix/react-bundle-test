@@ -8,9 +8,10 @@ import * as buttonActions from '../actions/ButtonActions'
 
 // Method used to map the state stores in the store to the props of the component
 function mapStateToProps(state) {
-    // return a new object (even if it's just a shallow copy of the state)
+    // using combineReducers from react-redux means the state will contain data
+    // split based on reducer names
     return {
-        "buttons": state.buttons
+        "buttons": state.buttonReducer.buttons
     }
 }
 
@@ -43,7 +44,7 @@ class ButtonCreator extends React.Component {
                 <form onSubmit={this._checkForm}>
                     <label htmlFor="buttonName">Button Name : </label>
                     <input placeholder="Enter your button name"
-                           value={this.state.buttonName} type="text"
+                           type="text"
                            name="buttonName"
                            ref="buttonName"
                            onChange={this._changedInput}/>
@@ -51,7 +52,6 @@ class ButtonCreator extends React.Component {
                     <label htmlFor="buttonMessage">Button Message : </label>
                     <input placeholder="Enter the message"
                            name="buttonMessage"
-                           value={this.state.buttonMessage}
                            type="text"
                            ref="buttonMessage"
                            onChange={this._changedInput}/>
@@ -85,9 +85,9 @@ class ButtonCreator extends React.Component {
         // That way, we call our action with some data and the dispatch call is gonna persist it in the store
         this.props.actions.createButton(myKey, myMessage);
         // Reset the values for buttonName and ButtonMessage (but not the rest of the state)
-        this.setState((state) => {
+        /*this.setState((state) => {
             return Object.assign({}, state, {"buttonName": "", "buttonMessage": ""})
-        })
+         })*/
     }
 
     // Method used to save the values of the buttonName and buttonMessage in the state (obsolete ?)
