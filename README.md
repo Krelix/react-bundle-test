@@ -29,23 +29,44 @@ All dependencies are marked as devDependencies since we bundle everything in a s
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "history": "^2.0.0",
+    "html-webpack-plugin": "^2.8.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-hot-loader": "^1.3.0",
     "react-redux": "^4.2.1",
     "react-router": "^2.0.0-rc5",
     "redux": "^3.2.1",
+    "style-loader": "^0.13.0",
+    "stylus-loader": "^1.5.1",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1"
   }
 ````
+
+### Stylus
+
+Most of the CSS is handled through Stylus (CSS compiler like LESS, SASS, etc.). The `main.styl` file is in `css/stylus`.
+ 
+### Babel
+
+Babel is a JavaScript compiler. It's used to enable ES2015 code in our app for the most part
+
+### Webpack
+
+TODO: Format and complete
+
+* Tool used to bundle and serve the app
+* Has code swapping enable in dev mode
+* Can build an app to a static HTML page that'll be served in some other way
 
 ### TODO
 
 Here is a list of additional elements that could be done :
 
 * Use `Immutable.js` to avoid changing the state of the Store
-* Use a lot more CSS. This looks rather terrible... (either pure CSS or Stylus ?)
+* Continue with styling
 * Add a section to explain a bit more the Webpack and Babel configuration
 * More things to do... ?
