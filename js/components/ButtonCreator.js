@@ -41,32 +41,41 @@ class ButtonCreator extends React.Component {
             <div>
                 <h1>Button Creator</h1>
                 <p>This is where we make buttons for the Internet.</p>
-                <form onSubmit={this._checkForm}>
-                    <label htmlFor="buttonName">Button Name : </label>
-                    <input placeholder="Enter your button name"
-                           type="text"
-                           name="buttonName"
-                           ref="buttonName"
-                           onChange={this._changedInput}/>
-                    <br />
-                    <label htmlFor="buttonMessage">Button Message : </label>
-                    <input placeholder="Enter the message"
-                           name="buttonMessage"
-                           type="text"
-                           ref="buttonMessage"
-                           onChange={this._changedInput}/>
-                    <br />
-                    <input type="submit" onClick={this._checkForm} value="Make me a button !"/>
+                <form onSubmit={this._checkForm} id="buttonForm">
+                    <div>
+                        <label htmlFor="buttonName">Button Name : </label>
+                        <input placeholder="Enter your button name"
+                               type="text"
+                               name="buttonName"
+                               ref="buttonName"
+                               onChange={this._changedInput}/>
+                    </div>
+                    <div>
+                        <label htmlFor="buttonMessage">Button Message : </label>
+                        <input placeholder="Enter the message"
+                               name="buttonMessage"
+                               type="text"
+                               ref="buttonMessage"
+                               onChange={this._changedInput}/>
+                    </div>
+                    <div id="submit">
+                        <button id="submitButton" type="submit" onClick={this._checkForm}>Make me a button !</button>
+                    </div>
                 </form>
                 <br />
                 <div>
                     {
-                        this.props.buttons.map((button) => {
-                            // Loop on list of buttons to show them
-                            return (
-                                <div className="button" key={button.id}><h5>{button.name}</h5><p>{button.message}</p>
-                                </div> )
-                        })
+                        <div id="buttonList">{
+                            this.props.buttons.map((button) => {
+                                // Loop on list of buttons to show them
+                                return (
+                                    <div className="button" key={button.id}>
+                                        <h4>{button.name}</h4>
+                                        <p>{button.message}</p>
+                                    </div> )
+                            })
+                        }
+                        </div>
                     }
                 </div>
             </div>
@@ -86,7 +95,7 @@ class ButtonCreator extends React.Component {
         this.props.actions.createButton(myKey, myMessage);
         // Reset the values for buttonName and ButtonMessage (but not the rest of the state)
         /*this.setState((state) => {
-            return Object.assign({}, state, {"buttonName": "", "buttonMessage": ""})
+         return Object.assign({}, state, {"buttonName": "", "buttonMessage": ""})
          })*/
     }
 

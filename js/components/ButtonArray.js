@@ -29,7 +29,7 @@ class ButtonArray extends React.Component {
         // Render different stuff depending on props
         if (this.props && this.props.buttons) {
             return (
-                <div>
+                <div style={{display: "flex"}}>
                     { this.props.buttons.map((button) => {
                         return (<div className="button" key={button.id}
                                      onClick={this.handleButtonClick.bind(this, button.id)}>{button.name}</div> )

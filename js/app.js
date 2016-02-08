@@ -12,7 +12,10 @@ import ButtonCreator from './components/ButtonCreator'
 import ButtonSimulator from './components/ButtonSimulator'
 import reducers from './reducers'
 
-// Creates a store using the reducers defined in ./reducers/index.js
+// Require the Stylus file so it can be processed by webpack when building.
+require('../css/stylus/main.styl')
+
+// Create a store using the reducers defined in ./reducers/index.js
 const theStore = createStore(reducers)
 // Creates a history using the hashHistory element from history
 // allows access to some URLs without setting up server-side rendering
@@ -58,6 +61,5 @@ ReactDOM.render(
     <Provider store={theStore}>
         <Router history={appHistory}>{routes}</Router>
     </Provider>,
-
     document.getElementById("app")
 )

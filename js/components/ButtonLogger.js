@@ -19,8 +19,7 @@ class ButtonLogger extends React.Component {
     render() {
         if (this.props && this.props["messages"]) {
             return (
-                <div style={{"clear": "both"}}>
-                    <hr />
+                <div style={{"clear": "both","border-top": "white 1px solid"}}>
                     {this.props.messages.map((message) => {
                         return <p key={message.id}>{message.date.toLocaleString()} - {message.text}</p>
                     })}

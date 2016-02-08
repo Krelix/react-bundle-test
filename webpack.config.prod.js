@@ -21,10 +21,11 @@ module.exports = {
             // ES6 bundling into build/bundle.js, except nod_modules
             {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
             // Build CSS to css folder
-            {test: /\.css$/, loader: "style!css"}
+            {test: /\.styl$/, loader: "style-loader!css-loader!stylus-loader"}
         ]
     },
     // Plugins to use for webpack
+    // TODO: Add Stylus compilation to a static css file with ExtractTextPlugin
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
