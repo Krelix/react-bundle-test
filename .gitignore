@@ -34,3 +34,4 @@ node_modules
 
 # Webpack build folder (better to rebuild after checkout)
 build
+static
