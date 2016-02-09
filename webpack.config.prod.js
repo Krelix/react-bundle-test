@@ -4,13 +4,17 @@
  * Only there as a test, to see how big UglifyJS makes the bundle after optimizations
  */
 var webpack = require('webpack');
+var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin')
+var data = require('./js/staticdata')
+
 module.exports = {
     // The different entries for the server
-    entry: ['./js/app.js'],
-    // OUtput dir of js files
+    entry: ['./js/staticApp.js'],
+    // Output dir of js files
     output: {
-        path: __dirname + '/build',
-        filename: "bundle.js"
+        path: __dirname + '/static',
+        filename: "bundle.js",
+        libraryTarget: 'umd'
     },
     // Loaders, meaning which JS files use which loader
     module: {
@@ -19,7 +23,7 @@ module.exports = {
             // (and avoid "Unexpected token"  error)
             {test: /\.js?$/, loaders: ['babel'], exclude: /node_modules/},
             // ES6 bundling into build/bundle.js, except nod_modules
-            {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+            /*{test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},*/
             // Build CSS to css folder
             {test: /\.styl$/, loader: "style-loader!css-loader!stylus-loader"}
         ]
@@ -32,10 +36,13 @@ module.exports = {
                 'NODE_ENV': '"production"'
             }
         }),
+        /*new webpack.optimize.CommonsChunkPlugin({name: 'vendors', filename: 'vendor.bundle.js', minChunks: Infinity}),*/
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
-        })
+            },
+            beautify: true
+        }),
+        new StaticSiteGeneratorPlugin('bundle.js', data.routes, data)
     ]
 };

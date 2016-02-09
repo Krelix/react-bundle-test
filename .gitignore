@@ -32,5 +32,6 @@ node_modules
 # Webstorm .idea folder
 .idea
 
-# Webpack build folder (better to rebuild after checkout)
+# Webpack build destinations (build for dev server, static for static generation)
 build
+static

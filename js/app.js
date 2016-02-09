@@ -3,7 +3,8 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, Link, IndexRoute, RouterContext, useRouterHistory } from 'react-router'
+import ReactDOMServer from 'react-dom/server'
+import { Router, RouterContext, Link, useRouterHistory } from 'react-router'
 import {createHashHistory} from 'history'
 import {createStore, combineReducers} from 'redux'
 import { Provider } from 'react-redux'
@@ -11,6 +12,7 @@ import Home from './components/Home'
 import ButtonCreator from './components/ButtonCreator'
 import ButtonSimulator from './components/ButtonSimulator'
 import reducers from './reducers'
+import routes from './routes.js'
 
 // Require the Stylus file so it can be processed by webpack when building.
 require('../css/stylus/main.styl')
@@ -38,22 +40,7 @@ class App extends React.Component {
     }
 }
 
-// Create the routes available
-// Provides navigation within the app (but no direct access from URL yet)
-// Root is / and its default content is the Home component
-// Content (props.children) changes if you have a different route to the appropriate component
-let routes = (
-    <Route path="/" component={App}>
-        <IndexRoute component={Home}/>
-        <Route path="buttonMaker" component={ButtonCreator}/>
-        <Route path="buttonSimulator" component={ButtonSimulator}/>
-    </Route>
-)
-
-/* Old version of React Router (pre-1.0)
- Router.run(routes, (Handler) => {
- React.render(<Handler/>, document.body)
- })*/
+// TODO: Enable static pages creation by using a variable to distinguish between ReactDOM red
 
 // Render the Router which will handle components rendering depending on the route
 // NOTE: Use browserHistory if you don't want to see the hash sign in the URL
